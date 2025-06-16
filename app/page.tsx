@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { supabase } from "../lib/supabaseClient";
+import JobCard from "../components/JobCard";
 
 export default async function Home() {
   // Testowy fetch do Supabase
@@ -70,6 +71,21 @@ export default async function Home() {
           ) : (
             <div>Brak danych lub tabela nie istnieje.</div>
           )}
+        </div>
+        {/* Przykładowy JobCard */}
+        <div className="my-8">
+          <JobCard
+            title="Junior Frontend Developer"
+            company_name="Example Corp"
+            location="Warszawa"
+            salary_from={7000}
+            salary_to={10000}
+            currency="PLN"
+            remote_type="remote"
+            seniority="junior"
+            industry="IT"
+            created_at={new Date().toISOString()}
+          />
         </div>
       </main>
       <footer className={styles.footer}>
