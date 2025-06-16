@@ -1,15 +1,15 @@
-# Next Step: Konfiguracja Supabase Auth (Email login)
+# Next Step: Stworzenie komponentu JobCard.tsx
 
 **Cel:**
-Skonfigurować uwierzytelnianie użytkowników przez email w Supabase oraz przygotować aplikację do obsługi logowania.
+Zaimplementować komponent React `JobCard.tsx` w folderze `components/`, który będzie odpowiadał za prezentację pojedynczej oferty pracy na liście.
 
 **Instrukcja:**
-1. Wejdź do panelu Supabase i wybierz swój projekt.
-2. W menu po lewej wybierz **Authentication → Providers**.
-3. W sekcji **Email** upewnij się, że opcja **Enable email sign-ups** jest włączona.
-4. (Opcjonalnie) Skonfiguruj magic link lub inne opcje (np. email templates, redirect URLs).
-5. Zapisz zmiany.
-6. W aplikacji Next.js przygotuj obsługę logowania przez Supabase Auth (np. za pomocą pakietu `@supabase/supabase-js` i funkcji `signInWithOtp` lub `signInWithPassword`).
+1. Utwórz folder `components/` w katalogu głównym projektu (jeśli jeszcze nie istnieje).
+2. Utwórz plik `JobCard.tsx` w folderze `components/`.
+3. Zaimplementuj komponent przyjmujący propsy z danymi oferty pracy (np. tytuł, firma, lokalizacja, widełki płacowe, typ pracy, seniority, itp.).
+4. Zadbaj o estetyczny wygląd (użyj TailwindCSS) i responsywność.
+5. Dodaj przykładowe typy propsów (możesz skorzystać z pliku `architecture.md` lub utworzyć tymczasowy typ w pliku).
+6. (Opcjonalnie) Dodaj placeholder na logo firmy.
 
 **Dlaczego to ważne?**
-Uwierzytelnianie użytkowników jest niezbędne do obsługi aplikacji na oferty pracy, panelu admina oraz personalizacji doświadczenia użytkownika. 
+Komponent `JobCard` będzie wielokrotnie wykorzystywany do wyświetlania ofert pracy na stronie głównej i w innych widokach. Jego jakość i elastyczność wpłyną na UX całej aplikacji. 
