@@ -26,4 +26,35 @@ Zaimplementować paginację listy ogłoszeń na stronie głównej, aby użytkown
 5. Obsłuż przypadki brzegowe (brak poprzedniej/następnej strony, pusta strona).
 
 **Dlaczego to ważne?**
-Paginacja poprawia UX i wydajność — użytkownik nie musi ładować wszystkich ogłoszeń naraz, a aplikacja lepiej skaluje się przy większej liczbie ofert. 
+Paginacja poprawia UX i wydajność — użytkownik nie musi ładować wszystkich ogłoszeń naraz, a aplikacja lepiej skaluje się przy większej liczbie ofert.
+
+# Next Step: Stworzenie strony app/job/[id]/page.tsx (widok szczegółów oferty)
+
+**Cel:**
+Zaimplementować stronę szczegółów pojedynczej oferty pracy, dostępną pod adresem `/job/[id]`, która wyświetli wszystkie informacje o wybranej ofercie.
+
+**Instrukcja:**
+1. Utwórz plik `app/job/[id]/page.tsx` (dynamiczna ścieżka Next.js App Router).
+2. Pobierz dane ogłoszenia z Supabase na podstawie parametru `id` z URL.
+3. Wyświetl szczegóły oferty: tytuł, firma, lokalizacja, opis (HTML), widełki płacowe, typ pracy, seniority, branża, data dodania, link źródłowy itp.
+4. Zadbaj o estetyczny i czytelny layout (TailwindCSS, responsywność).
+5. Obsłuż przypadek braku oferty (np. komunikat "Nie znaleziono oferty").
+6. (Opcjonalnie) Dodaj przycisk powrotu do listy lub nawigację.
+
+**Dlaczego to ważne?**
+Szczegóły oferty to kluczowy widok dla użytkownika — pozwala zapoznać się z pełną treścią ogłoszenia i podjąć decyzję o aplikowaniu.
+
+# Next Step: Dodanie Navbar i Footer
+
+**Cel:**
+Zaimplementować nawigację górną (Navbar) i stopkę (Footer) widoczne na wszystkich stronach aplikacji.
+
+**Instrukcja:**
+1. Utwórz komponenty `Navbar.tsx` i `Footer.tsx` w folderze `components/`.
+2. Dodaj do `app/layout.tsx` import i użycie tych komponentów, aby były widoczne na wszystkich podstronach.
+3. W `Navbar` umieść logo, nazwę serwisu i (opcjonalnie) linki do głównych sekcji (np. Oferty, Panel admina).
+4. W `Footer` umieść informacje o serwisie, linki do polityki prywatności, kontaktu itp.
+5. Zadbaj o estetyczny wygląd i responsywność (TailwindCSS).
+
+**Dlaczego to ważne?**
+Spójna nawigacja i stopka poprawiają UX, ułatwiają poruszanie się po serwisie i budują profesjonalny wizerunek aplikacji. 
