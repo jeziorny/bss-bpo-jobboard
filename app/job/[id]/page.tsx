@@ -1,5 +1,6 @@
 import { supabase } from '../../../lib/supabaseClient';
 import Link from 'next/link';
+import ApplyForm from '../../../components/ApplyForm';
 
 interface JobDetailsProps {
   params: { id: string };
@@ -7,50 +8,45 @@ interface JobDetailsProps {
 
 export default async function JobDetails({ params }: JobDetailsProps) {
   const { id } = params;
-  let job = null;
-  let error = null;
-  try {
-    const { data, error: fetchError } = await supabase.from('jobs').select('*').eq('id', id).single();
-    job = data;
-    error = fetchError;
-  } catch (e) {
-    error = e instanceof Error ? e.message : String(e);
-  }
+  const { data: job, error } = await supabase
+    .from('jobs')
+    .select('*')
+    .eq('id', id)
+    .single();
 
   if (error || !job) {
     return (
-      <div className="max-w-2xl mx-auto p-6">
-        <div className="text-red-600 font-bold mb-4">Nie znaleziono oferty lub wystąpił błąd.</div>
-        <Link href="/" className="text-blue-600 underline">Powrót do listy ofert</Link>
+      <div className="max-w-2xl mx-auto py-12 text-center">
+        <h2 className="text-xl font-bold mb-4">Nie znaleziono oferty</h2>
+        <Link href="/" className="text-blue-700 underline">Wróć do listy ofert</Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow mt-8">
-      <Link href="/" className="text-blue-600 underline mb-4 inline-block">&larr; Powrót do listy ofert</Link>
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-2xl">🏢</div>
-        <div>
-          <h1 className="text-2xl font-bold mb-1">{job.title}</h1>
-          <div className="text-gray-700">{job.company_name}{job.location && ` • ${job.location}`}</div>
+    <div className="max-w-2xl mx-auto py-12 px-4">
+      <div className="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 className="text-2xl font-bold mb-2">{job.title}</h2>
+        <div className="text-gray-600 mb-2">{job.company_name} • {job.location}</div>
+        <div className="mb-2">
+          <span className="inline-block bg-gray-100 rounded px-2 py-1 text-xs mr-2">{job.remote_type}</span>
+          <span className="inline-block bg-gray-100 rounded px-2 py-1 text-xs mr-2">{job.seniority}</span>
+          <span className="inline-block bg-gray-100 rounded px-2 py-1 text-xs">{job.industry}</span>
+        </div>
+        <div className="mb-2 text-sm text-gray-500">
+          {job.salary_from && job.salary_to ? (
+            <span>{job.salary_from} - {job.salary_to} {job.currency || 'PLN'}</span>
+          ) : (
+            <span>Wynagrodzenie: nie podano</span>
+          )}
+        </div>
+        <div className="mb-2 text-xs text-gray-400">Dodano: {job.created_at?.slice(0, 10)}</div>
+        <div className="mt-4 text-gray-800 text-sm whitespace-pre-line">
+          {job.description || 'Brak opisu.'}
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 mb-4 text-xs text-gray-500">
-        {job.remote_type && <span className="px-2 py-0.5 bg-gray-100 rounded">{job.remote_type}</span>}
-        {job.seniority && <span className="px-2 py-0.5 bg-gray-100 rounded">{job.seniority}</span>}
-        {job.industry && <span className="px-2 py-0.5 bg-gray-100 rounded">{job.industry}</span>}
-        {job.salary_from && job.salary_to && (
-          <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded">
-            {job.salary_from} - {job.salary_to} {job.currency}
-          </span>
-        )}
-      </div>
-      <div className="prose prose-sm max-w-none mb-4" dangerouslySetInnerHTML={{ __html: job.description_html || '' }} />
-      <div className="text-xs text-gray-400 mb-2">Dodano: {job.created_at ? new Date(job.created_at).toLocaleDateString() : ''}</div>
-      {job.source_url && (
-        <a href={job.source_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm">Zobacz oryginalne ogłoszenie</a>
-      )}
+      {/* Formularz aplikacji */}
+      <ApplyForm job={job} />
     </div>
   );
 } 

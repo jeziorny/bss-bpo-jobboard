@@ -90,4 +90,20 @@ Pozwolić użytkownikowi aplikować na wybraną ofertę pracy oraz obsłużyć f
 7. Zadbaj o estetyczny wygląd i UX (feedback, loading, komunikaty).
 
 **Dlaczego to ważne?**
-To kluczowy element MVP — użytkownik może realnie aplikować na ofertę, a Ty masz logi aplikacji w bazie. To podstawa do dalszego rozwoju (np. powiadomienia, panel admina, statystyki). 
+To kluczowy element MVP — użytkownik może realnie aplikować na ofertę, a Ty masz logi aplikacji w bazie. To podstawa do dalszego rozwoju (np. powiadomienia, panel admina, statystyki).
+
+# Next Step: Admin Panel MVP — logowanie do panelu admina
+
+**Cel:**
+Stworzyć stronę logowania do panelu administracyjnego z wykorzystaniem Supabase Auth (Email login).
+
+**Instrukcja:**
+1. Utwórz folder `app/admin/` i plik `app/admin/login/page.tsx`.
+2. Zaimplementuj prosty formularz logowania (e-mail + hasło) z obsługą Supabase Auth (signInWithPassword).
+3. Po zalogowaniu przekieruj użytkownika do `/admin/dashboard`.
+4. Obsłuż komunikaty o błędach (np. nieprawidłowe dane, brak konta).
+5. Zadbaj o estetyczny wygląd i responsywność formularza (TailwindCSS).
+6. (Opcjonalnie) Dodaj obsługę wylogowania i sprawdzanie, czy użytkownik jest zalogowany (redirect jeśli nie).
+
+**Dlaczego to ważne?**
+Panel admina pozwala zarządzać ofertami, aplikacjami i danymi w systemie. Logowanie to pierwszy krok do zabezpieczenia części administracyjnej aplikacji. 

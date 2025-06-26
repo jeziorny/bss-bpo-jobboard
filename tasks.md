@@ -97,3 +97,7 @@ Testowanie kliknięć i aplikacji.
 Testowanie scraper → DB → FE.
 
 Wdrożenie na produkcję (Vercel + Supabase).
+
+# Różnice względem checklisty
+
+- Komunikaty sukcesu/błędu po aplikacji są wyświetlane inline na stronie szczegółów oferty, a nie na osobnych stronach `app/apply/success` i `app/apply/error`. Jest to zgodne z decyzją UX podjętą w trakcie implementacji (lepszy, szybszy feedback dla użytkownika).
