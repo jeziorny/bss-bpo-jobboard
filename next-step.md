@@ -28,6 +28,22 @@ Zaimplementować paginację listy ogłoszeń na stronie głównej, aby użytkown
 **Dlaczego to ważne?**
 Paginacja poprawia UX i wydajność — użytkownik nie musi ładować wszystkich ogłoszeń naraz, a aplikacja lepiej skaluje się przy większej liczbie ofert.
 
+# Next Step: Filtry ofert pracy (MVP)
+
+**Cel:**
+Pozwolić użytkownikowi filtrować listę ogłoszeń po wybranych kryteriach (np. lokalizacja, typ pracy, seniority, branża) z zachowaniem stanu filtrów w URL.
+
+**Instrukcja:**
+1. Stwórz hook `useFilters.ts` (zarządzanie stanem filtrów, synchronizacja z URL params).
+2. Zbuduj komponent `FilterDialog.tsx` (modal/overlay z polami wyboru filtrów: lokalizacja, typ pracy, seniority, branża, itp.).
+3. Dodaj do fetchowania ogłoszeń w Supabase obsługę filtrów na podstawie URL params.
+4. Uporządkuj URL params (UX: filtry trzymane w URL, łatwe kopiowanie linku do wyników).
+5. Zadbaj o estetyczny wygląd i responsywność (TailwindCSS).
+6. Obsłuż przypadek braku wyników po filtracji (komunikat: "Brak ofert spełniających wybrane kryteria").
+
+**Dlaczego to ważne?**
+Filtry znacząco poprawiają UX, pozwalają użytkownikom szybko znaleźć interesujące ich oferty i są kluczowe dla skalowalności aplikacji.
+
 # Next Step: Stworzenie strony app/job/[id]/page.tsx (widok szczegółów oferty)
 
 **Cel:**
@@ -57,4 +73,21 @@ Zaimplementować nawigację górną (Navbar) i stopkę (Footer) widoczne na wszy
 5. Zadbaj o estetyczny wygląd i responsywność (TailwindCSS).
 
 **Dlaczego to ważne?**
-Spójna nawigacja i stopka poprawiają UX, ułatwiają poruszanie się po serwisie i budują profesjonalny wizerunek aplikacji. 
+Spójna nawigacja i stopka poprawiają UX, ułatwiają poruszanie się po serwisie i budują profesjonalny wizerunek aplikacji.
+
+# Next Step: Flow aplikacji — aplikowanie na ofertę pracy
+
+**Cel:**
+Pozwolić użytkownikowi aplikować na wybraną ofertę pracy oraz obsłużyć flow sukcesu/błędu i logowanie aplikacji w bazie.
+
+**Instrukcja:**
+1. Stwórz API route `/api/apply` (Next.js API route lub route handler w app/api/apply/route.ts) — endpoint do obsługi aplikowania na ofertę (np. POST z danymi aplikacji).
+2. Stwórz stronę `app/apply/success` — komunikat o sukcesie aplikacji.
+3. Stwórz stronę `app/apply/error` — komunikat o błędzie aplikacji.
+4. Dodaj przycisk "Aplikuj" na stronie szczegółów oferty (`app/job/[id]/page.tsx`), który wywołuje API apply i przekierowuje na success/error.
+5. Dodaj logowanie kliknięć/aplikacji do tabeli `applications` w Supabase (zapisz id oferty, e-mail, timestamp, itp.).
+6. Zadbaj o walidację danych i obsługę błędów (np. brak e-maila, błąd zapisu).
+7. Zadbaj o estetyczny wygląd i UX (feedback, loading, komunikaty).
+
+**Dlaczego to ważne?**
+To kluczowy element MVP — użytkownik może realnie aplikować na ofertę, a Ty masz logi aplikacji w bazie. To podstawa do dalszego rozwoju (np. powiadomienia, panel admina, statystyki). 
