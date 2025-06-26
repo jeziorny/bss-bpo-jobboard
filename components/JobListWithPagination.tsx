@@ -57,7 +57,7 @@ export default function JobListWithPagination() {
       {loading && <div>Ładowanie...</div>}
       {error && <div className="text-red-500">Błąd: {error}</div>}
       {!loading && jobs.length === 0 && <div>Brak ofert spełniających wybrane kryteria</div>}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-6">
+      <div className="flex flex-col gap-4 my-6">
         {jobs.map((job) => (
           <JobCard key={job.id} {...job} />
         ))}
