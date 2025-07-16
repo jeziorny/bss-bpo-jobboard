@@ -3,11 +3,11 @@ import Link from 'next/link';
 import ApplyForm from '../../../components/ApplyForm';
 
 interface JobDetailsProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function JobDetails({ params }: JobDetailsProps) {
-  const { id } = params;
+  const { id } = await params;
   const { data: job, error } = await supabase
     .from('jobs')
     .select('*')

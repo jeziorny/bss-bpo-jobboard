@@ -49,7 +49,7 @@ function ApplyModal({ open, onClose, job }: { open: boolean; onClose: () => void
       } else {
         setError(data.error || "Wystąpił błąd podczas aplikowania.");
       }
-    } catch (err) {
+    } catch {
       setError("Wystąpił błąd sieci.");
     } finally {
       setLoading(false);

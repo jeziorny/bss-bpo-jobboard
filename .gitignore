@@ -42,3 +42,8 @@ next-env.d.ts
 
 # Supabase
 .env.local
+
+# Test files
+test-*.js
+create-test-user.js
+debug-auth.html

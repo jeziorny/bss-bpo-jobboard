@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const email = formData.get('email');
     const cv = formData.get('cv'); // File lub null
     const userAgent = req.headers.get('user-agent') || '';
-    const ip = req.headers.get('x-forwarded-for') || req.ip || '';
+    const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || '';
     const timestamp = new Date().toISOString();
 
     if (!jobId || !email) {
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     }
 
     // (Opcjonalnie) obsługa uploadu CV do Supabase Storage — do wdrożenia później
-    let cvUrl = null;
+    const cvUrl = null;
     if (cv && typeof cv === 'object' && 'name' in cv) {
       // TODO: upload pliku do Supabase Storage i pobranie URL
       // cvUrl = ...
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Błąd zapisu do bazy.' }, { status: 500 });
     }
     return NextResponse.json({ success: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Błąd serwera.' }, { status: 500 });
   }
 } 

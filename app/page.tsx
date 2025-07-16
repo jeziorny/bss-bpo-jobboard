@@ -1,10 +1,9 @@
-"use client";
-
+import { Suspense } from "react";
 import FilterBar from "../components/FilterBar";
 import JobListWithPagination from "../components/JobListWithPagination";
 import Footer from "../components/Footer";
 
-export default function Home() {
+function HomeContent() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <main className="flex-1 w-full max-w-6xl mx-auto flex flex-col items-center px-4 py-8">
@@ -20,5 +19,13 @@ export default function Home() {
         <Footer />
       </footer>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div>Ładowanie...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

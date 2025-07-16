@@ -32,7 +32,7 @@ export default function ApplyForm({ job }: { job: JobCardProps }) {
       } else {
         setError(data.error || "Wystąpił błąd podczas aplikowania.");
       }
-    } catch (err) {
+    } catch {
       setError("Wystąpił błąd sieci.");
     } finally {
       setLoading(false);

@@ -10,8 +10,6 @@ const industries = ["BPO", "SSC", "IT", "HR", "Finance"];
 
 export default function FilterBar() {
   const {
-    filters,
-    setFilter,
     resetFilters,
     applyFilters,
     tempFilters,

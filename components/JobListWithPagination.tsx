@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import JobCard from "./JobCard";
+import JobCard, { type JobCardProps } from "./JobCard";
 import Pagination from "./Pagination";
 import { supabase } from "../lib/supabaseClient";
 import { useFilters } from "../hooks/useFilters";
@@ -9,8 +9,8 @@ import { useFilters } from "../hooks/useFilters";
 const PAGE_SIZE = 10;
 
 export default function JobListWithPagination() {
-  const { filters, page, setPage, applyFilters } = useFilters();
-  const [jobs, setJobs] = useState<any[]>([]);
+  const { filters, page, setPage } = useFilters();
+  const [jobs, setJobs] = useState<JobCardProps[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -40,8 +40,8 @@ export default function JobListWithPagination() {
           setJobs(data || []);
           setTotalPages(Math.ceil((count || 0) / PAGE_SIZE));
         }
-      } catch (e: any) {
-        setError(e.message || String(e));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : String(e));
         setJobs([]);
       } finally {
         setLoading(false);
